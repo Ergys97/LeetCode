@@ -7,6 +7,10 @@ var minDifference = function(nums) {
         return 0;
     } else {
         nums.sort((a, b) => a - b);
-        return Math.min(nums[nums.length - 1] - nums[3], nums[nums.length - 2] - nums[2], nums[nums.length - 3] - nums[1], nums[nums.length - 4] - nums[0]);
+        let minDiff = Infinity;
+        for (let i = 0; i < 4; i++) {
+            minDiff = Math.min(minDiff, nums[nums.length - 1 - i] - nums[3 - i]);
+        }
+        return minDiff;
     }
 };
