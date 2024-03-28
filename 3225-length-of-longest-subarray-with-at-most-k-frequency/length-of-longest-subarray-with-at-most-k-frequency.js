@@ -4,23 +4,21 @@
  * @return {number}
  */
 var maxSubarrayLength = function(nums, k) {
-    let freqMap = new Map();
-    let left = 0;
-    let maxLength = 0;
-
-    for (let right = 0; right < nums.length; right++) {
-        freqMap.set(nums[right], (freqMap.get(nums[right]) || 0) + 1);
-
-        while (freqMap.get(nums[right]) > k) {
-            freqMap.set(nums[left], freqMap.get(nums[left]) - 1);
-            if (freqMap.get(nums[left]) === 0) {
-                freqMap.delete(nums[left]);
+    let ans = 0;
+    let mp = new Map();
+    let l = 0;
+    const n = nums.length;
+    for (let r = 0; r < n; r++) {
+        mp.set(nums[r], (mp.get(nums[r]) || 0) + 1);
+        if (mp.get(nums[r]) > k) {
+            while (nums[l] !== nums[r]) {
+                mp.set(nums[l], mp.get(nums[l]) - 1);
+                l++;
             }
-            left++;
+            mp.set(nums[l], mp.get(nums[l]) - 1);
+            l++;
         }
-
-        maxLength = Math.max(maxLength, right - left + 1);
+        ans = Math.max(ans, r - l + 1);
     }
-
-    return maxLength;
+    return ans;
 };
