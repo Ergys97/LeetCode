@@ -3,25 +3,20 @@
  * @return {number}
  */
 var countSubstrings = function(s) {
-    if (s == null || s.length === 0) {
-        return 0;
-    }
-
-    let n = s.length;
-    let dp = Array(n).fill(false).map(() => Array(n).fill(false));
+    const n = s.length;
     let count = 0;
-
-    for (let i = 0; i < n; i++, count++) {
-        dp[i][i] = true;
-    }
-
-    for (let start = n - 1; start >= 0; start--) {
-        for (let end = start + 1; end < n; end++) {
-            if (s[start] == s[end]) {
-                if (end - start == 1 || dp[start + 1][end - 1]) {
-                    dp[start][end] = true;
-                    count++;
-                }
+    const isPalindrome = (start, end) => {
+        while (start < end) {
+            if (s[start++] !== s[end--]) {
+                return false;
+            }
+        }
+        return true;
+    };
+    for (let i = 0; i < n; i++) {
+        for (let j = i; j < n; j++) {
+            if (isPalindrome(i, j)) {
+                count++;
             }
         }
     }
