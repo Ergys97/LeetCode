@@ -3,14 +3,12 @@
  * @return {number}
  */
 var minDifference = function(nums) {
-    if(nums.length <= 4) return 0;
+    if (nums.length <= 4) return 0;
 
-    nums.sort((a,b) => a-b);
-    console.log(nums)
-    let n = nums.length;
-    let min = Number.MAX_SAFE_INTEGER;
-    for(let i=0; i<4; i++){
-        min = Math.min(min, nums[n-4+i] - nums[i]);
+    nums.sort((a, b) => a - b);
+    let minDiff = Number.MAX_SAFE_INTEGER;
+    for (let i = 0; i < 4; i++) {
+        minDiff = Math.min(minDiff, nums[nums.length - 4 + i] - nums[i]);
     }
-    return min;
+    return minDiff;
 };
