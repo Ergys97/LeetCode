@@ -7,11 +7,9 @@ var minimumChairs = function (s) {
     let chairs = 0;
     for (let i = 0; i < s.length; i++) {
         if (s[i] === 'E') {
-            if (availableChairs === chairs) {
-                availableChairs++;
-                chairs++;
-            } else {
-                chairs++;
+            chairs++;
+            if (chairs > availableChairs) {
+                availableChairs = chairs;
             }
         } else {
             chairs--;
